@@ -30,3 +30,12 @@ class Field(object):
             for j in range(3):
                 print(self.field[i][j], end=" ")
             print("\n" + '-' * 14)
+
+def change_sym(name):
+    print(f"Выбор символа для {name}")
+    ch = ["1", "2"]
+    syms = input("1. X\n2. O\n")
+    while syms not in ch:
+        print("Данного выбора нет, выберите номер символа из предлагаемого списка")
+        syms = input("1. X\n2. O\n")
+    return "X" if syms == "1" else "O"
