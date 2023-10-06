@@ -14,6 +14,16 @@ def checkWinner(lst, sym):
             break
     return winner
 
+def checkDraw(lst, sym):
+    if checkWinner(lst, sym) != 0:
+        return checkWinner(lst, sym)
+    for x in lst:
+        if lst[x] == 0:
+            return 0
+    print("Ничья")
+    return 1
+
+
 class Field(object):
     def __init__(self):
         self.field = [["|A1 |", "|A2 |", "|A3 |"], ["|B1 |", "|B2 |", "|B3 |"], ["|C1 |", "|C2 |", "|C3 |"]]
@@ -90,5 +100,7 @@ def game(name1, name2):
             if field.makeMove(currentPlayer, input("Введите координату клетки: ")) != 0:
                 print(f"Победитель - {player_syms[currentPlayer]}")
                 win = 1
+                break
+            if checkDraw(field.sym, currentPlayer):
                 break
 game("Sergey", "Hoyus")
