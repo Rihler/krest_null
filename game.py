@@ -39,3 +39,20 @@ def change_sym(name):
         print("Данного выбора нет, выберите номер символа из предлагаемого списка")
         syms = input("1. X\n2. O\n")
     return "X" if syms == "1" else "O"
+
+def checkWinner(lst, sym):
+    winner = 0
+    win_lst = [["A1", "A2", "A3"],
+               ["B1", "B2", "B3"],
+               ["C1", "C2", "C3"]
+               ["A1", "B2", "C3"],
+               ["A3", "B2", "C1"],
+               ["A1","B1", "C1"],
+               ["A2","B2", "C2"],
+               ["A3", "B3", "C3"]]
+    for i in range(8):
+        if lst[win_lst[i][0]] == lst[win_lst[i][1]] == lst[win_lst[i][2]]\
+              and lst[win_lst[i][0]] != 0:
+            winner = lst[win_lst[i][0]]
+            break
+    return winner
