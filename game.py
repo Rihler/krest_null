@@ -14,16 +14,6 @@ def checkWinner(lst, sym):
             break
     return winner
 
-def checkDraw(lst, sym):
-    if checkWinner(lst, sym) != 0:
-        return checkWinner(lst, sym)
-    for x in lst:
-        if lst[x] == 0:
-            return 0
-    print("Ничья")
-    return 1
-
-
 class Field(object):
     def __init__(self):
         self.field = [["|A1 |", "|A2 |", "|A3 |"], ["|B1 |", "|B2 |", "|B3 |"], ["|C1 |", "|C2 |", "|C3 |"]]
@@ -83,6 +73,20 @@ def change_sym(name):
         syms = input("1. X\n2. O\n")
     return "X" if syms == "1" else "O"
 
+def checkDraw(lst, field, currentPlayer, table):
+    cnt = 0
+    for x in lst:
+        if lst[x] != 0:
+            cnt+=1
+    if cnt == 9:
+        print("Ничья")
+        return 1
+    print(f"Ходит - {table[currentPlayer]}")
+    if field.makeMove(currentPlayer, input("Введите координату клетки: ")) != 0:
+            print(f"Победитель - {table[currentPlayer]}")
+            return 1
+    return 0
+
 def game(name1, name2):
     field = Field()
     field.print_field()
@@ -95,13 +99,8 @@ def game(name1, name2):
     while not(win):
         for i in player_syms:
             currentPlayer = i
-            print(f"Ходит - {player_syms[i]}")
             field.print_field()
-            if checkDraw(field.sym, currentPlayer):
-                win = 1
-                break
-            if field.makeMove(currentPlayer, input("Введите координату клетки: ")) != 0:
-                print(f"Победитель - {player_syms[currentPlayer]}")
+            if checkDraw(field.sym,field, currentPlayer, player_syms):
                 win = 1
                 break
 game("Sergey", "Hoyus")
