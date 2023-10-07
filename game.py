@@ -97,10 +97,11 @@ def game(name1, name2):
             currentPlayer = i
             print(f"Ходит - {player_syms[i]}")
             field.print_field()
+            if checkDraw(field.sym, currentPlayer):
+                win = 1
+                break
             if field.makeMove(currentPlayer, input("Введите координату клетки: ")) != 0:
                 print(f"Победитель - {player_syms[currentPlayer]}")
                 win = 1
-                break
-            if checkDraw(field.sym, currentPlayer):
                 break
 game("Sergey", "Hoyus")
